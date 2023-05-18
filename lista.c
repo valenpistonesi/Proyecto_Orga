@@ -109,7 +109,8 @@ unsigned int lista_cantidad(lista_t *l) {
 }
 
 //Dada la lista l y la funcion comparar ordena la lista de acuerdo al criterio de dicha funci´on.
-int lista_ordenar(lista_t *l, funcion_comparacion_t comparar)
+int lista_ordenar(lista_t *l, funcion_comparacion_t comparar){
+    return 0;}
 
 
 //fin implementacion

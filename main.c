@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "lista.c"
+#include "multiset.c"
 
 int main()
 {
