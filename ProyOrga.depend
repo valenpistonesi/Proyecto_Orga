@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1684241080 source:c:\users\oc\desktop\proyecto orga\proyorga\main.c
+	<stdio.h>
+	<stdlib.h>
+	"lista.c"
+
+1684248724 c:\users\oc\desktop\proyecto orga\proyorga\lista.c
+	"lista.h"
+
+1684243786 c:\users\oc\desktop\proyecto orga\proyorga\lista.h
+
