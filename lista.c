@@ -3,8 +3,7 @@
 typedef struct celda {
 elemento_t *elem;
 struct celda *siguiente;
-}celda_e;
-//^cambiar
+};
 
 //TODO: chequear malloc por nulls, checkear parametros nulos
 
@@ -112,6 +111,26 @@ unsigned int lista_cantidad(lista_t *l) {
 int lista_ordenar(lista_t *l, funcion_comparacion_t comparar){
     return 0;}
 
+
+comparacion_resultado_t funcion_comparacion_t(elemento_t *elem1,elemento_t *elem2) {
+    comparacion_resultado_t devolver = NULL;
+
+    //compara la cantidad de veces que la palabra aparece
+    if(elem1 -> a > elem2 -> a) {
+        devolver = ELEM1_MAYOR_QUE_ELEM2;
+    } else if(elem2 -> a > elem1 -> a) {
+               devolver = ELEM1_MENOR_QUE_ELEM2;
+           }
+           //si aparecen la misma cant de veces, ordeno alfabeticamente
+           else if (strcmp(elem1 -> b, elem2 -> b) > 0) {
+                    devolver = ELEM1_MAYOR_QUE_ELEM2;
+                } else if (strcmp(elem1 -> b, elem2 -> b) < 0) {
+                          devolver = ELEM1_MENOR_QUE_ELEM2;;
+                       }
+                       else devolver = ELEM1_IGUAL_QUE_ELEM2;
+
+    return devolver;
+}
 
 //fin implementacion
 
