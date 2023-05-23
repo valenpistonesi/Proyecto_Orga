@@ -41,3 +41,22 @@
 
 1684787706 c:\users\usuario\desktop\entorno\multiset.h
 
+1684881718 source:c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\main.c
+	<stdio.h>
+	<stdlib.h>
+	"lista.c"
+	"multiset.c"
+	<stdbool.h>
+	<dirent.h>
+	<unistd.h>
+
+1684874804 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\lista.c
+	"lista.h"
+
+1684871229 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\lista.h
+
+1684875454 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\multiset.c
+	"multiset.h"
+
+1684871229 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\multiset.h
+
