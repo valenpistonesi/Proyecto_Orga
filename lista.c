@@ -1,9 +1,10 @@
-#include "lista.h"
 
-typedef struct celda {
+#include "lista.h"
+struct celda {
 elemento_t *elem;
 struct celda *siguiente;
-}celda_e;
+};
+
 //^cambiar
 
 //TODO: chequear malloc por nulls, checkear parametros nulos
@@ -23,7 +24,6 @@ lista_t* lista_crear(){
 int lista_vacia(lista_t lista)  {
     return lista.cantidad == 0;
 }
-
 
 // Inserta el elemento elem en la posicion pos de la lista.
 int lista_insertar(lista_t *l, elemento_t elemen, unsigned int pos){
@@ -108,8 +108,24 @@ unsigned int lista_cantidad(lista_t *l) {
     return l->cantidad;
 }
 
+void lista_intercambiar(lista_t *l,int pos1, int pos2){
+    elemento_t * e1 = lista_elemento(l,pos1);
+    lista_insertar(l, *lista_elemento(l,pos2), pos1);
+    lista_insertar(l, *e1, pos2);}
+
 //Dada la lista l y la funcion comparar ordena la lista de acuerdo al criterio de dicha funci´on.
 int lista_ordenar(lista_t *l, funcion_comparacion_t comparar){
+    //comparacion_elemento_t:comparar (elemento_t *1, elemento_t *2);
+    //hecho de mayor a menor (?)
+    int correcto = 1;
+    do{
+        for(int i = 0; i< lista_cantidad(l) -1; i++){
+            if(comparar(lista_elemento(l,i),lista_elemento(l,i+1)) == 2){ //elem1 menor a elem2
+                lista_intercambiar(l,i,i+1);
+                correcto = 0;}
+        }
+
+    }while(!correcto);
     return 0;}
 
 

@@ -44,7 +44,47 @@ int multiset_cantidad(multiset_t *m, char *s){
          else cantidad = 0;}
     return cantidad;}
 
+void multiset_recorredor_e(multiset_t *m, lista_t *l, char* p, int cant){
+    for(int i; i< (sizeof(m -> siguiente) / sizeof(m-> siguiente[0])); i++){
+        if(m-> siguiente[i] != NULL){
+            p[cant] = i+97;
+            cant++;
+            char *pal[cant];
+            elemento_t *elem;
+            elem = malloc(sizeof(elemento_t));
+            for(int j = 0; j< cant; j++){
+                *pal[j] = p[j];}
+            p[cant-1] = '\0';
+            elem -> b = *pal;
+            elem -> a = m -> cantidad;
+            lista_insertar(l, *elem ,lista_cantidad(l));
+            multiset_recorredor_e(m -> siguiente[i], l, p,cant);
+        }
+    }
+}
 //Devuelve una lista de tipo lista t ordenada segun la funcion f con todos los elementos del
 //multiset m y la cantidad de apariciones de cada uno.
-lista_t multiset_elementos(multiset_t *m, int (*f)(elemento_t,elemento_t)){}
+lista_t multiset_elementos(multiset_t *m, int (*f)(elemento_t,elemento_t)){
+    lista_t *l;
+    l= lista_crear();
+    char *p[30];
+    int cant = 0;
+    multiset_recorredor_e(m,l,*p,cant);
+    //lista_ordenar(l,(funcion_comparacion_t) *f);
+    return *l;
+}
+
+void multiset_recorredor_m(multiset_t *m){
+    for (int i = 0; i< (sizeof(m -> siguiente) / sizeof(m-> siguiente[0])); i++){
+        multiset_recorredor_m(m->siguiente[i]);}
+    free(m);
+}
+
+//Elimina el multiset m liberando el espacio
+//de memoria reservado. Luego de la invocaci´on m debe valer NULL.
+void multiset_eliminar(multiset_t **m){
+    multiset_recorredor_m(*m);
+
+}
+
 

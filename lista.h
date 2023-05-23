@@ -13,8 +13,7 @@ char *b;
 
 typedef struct elemento elemento_t;
 
-typedef comparacion_resultado_t (funcion_comparacion_t)
-(elemento_t *elem1,elemento_t *elem2);
+typedef comparacion_resultado_t (funcion_comparacion_t) (elemento_t *elem1,elemento_t *elem2);
 
 typedef struct celda celda_t;
 

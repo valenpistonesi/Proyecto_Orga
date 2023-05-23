@@ -25,3 +25,19 @@
 
 1684413007 c:\users\usuario\desktop\proyecto orga (1)\proyecto orga\proyorga\multiset.h
 
+1684793487 source:c:\users\usuario\desktop\entorno\main.c
+	<stdio.h>
+	<stdlib.h>
+	"lista.c"
+	"multiset.c"
+
+1684793594 c:\users\usuario\desktop\entorno\lista.c
+	"lista.h"
+
+1684791907 c:\users\usuario\desktop\entorno\lista.h
+
+1684794629 c:\users\usuario\desktop\entorno\multiset.c
+	"multiset.h"
+
+1684787706 c:\users\usuario\desktop\entorno\multiset.h
+
