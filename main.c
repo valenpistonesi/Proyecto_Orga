@@ -8,12 +8,15 @@
 #define tamano_palabra_maximo 40
 #define max_length 255
 
+//REVISAR: inicializar todo como null
+//
+
 bool tiene_extension_txt (char const *nombre) {
     size_t largo = strlen(nombre);
     return largo > 4 && strcmp(nombre + largo - 4, ".txt") == 0;
 }
 
-void obtener_palabras(char *filename ,multiset_t *m){
+int obtener_palabras(char *filename ,multiset_t *m){
     FILE *fp = fopen(filename, "r");
 
     if (fp == NULL)
@@ -23,20 +26,19 @@ void obtener_palabras(char *filename ,multiset_t *m){
     }
 
     // reading line by line, max 256 bytes
-    const unsigned MAX_LENGTH = 256;
-    char buffer[MAX_LENGTH];
-    char array [7][40], s[100];
+    char buffer[tamano_palabra_maximo];
 
 
     for(int i=0; fgets(buffer, max_length, fp); i++) {
-        strcpy(array[i], buffer);
-        printf("%s", array[i]);
+        multiset_insertar(m, buffer);
+        printf(toString(m,7));
     }
 
-    /*char palabra[tamano_palabra_maximo +1];
+char palabra[tamano_palabra_maximo +1];
     int j = 0;
 
-    for(int i=0; fgets(buffer, max_length, fp); i++) {//
+    for(int i=0; fgets(buffer, max_length, fp); i++) {
+
         if( buffer[i]>=97 && buffer[i]<= 122 && j<tamano_palabra_maximo){
             printf(buffer[i]);
             palabra[j]= buffer[i];
@@ -45,21 +47,24 @@ void obtener_palabras(char *filename ,multiset_t *m){
             palabra[j] = '\0';
             printf("\n");
             j = 0;
-            //multiset_insertar(m,palabra);
+            multiset_insertar(m,palabra);
         }
-        //printf("%s", buffer[i]);
+        printf("%s", buffer[i]);
     }
-    //multiset_insertar(m,palabra);*/
+    multiset_insertar(m,palabra);
+
+    return 0;
 }
 
 
 int main() {
+
     //leer textos y una sola vez(sin guardarlos en ninguna lista o array), mientras se leen se sacan
     //las palabras y se guardan en el multiset, luegoo de ese multiset se forma el archivo
 
     char *dirNombre = malloc(sizeof(char) * 50); //directorios a leer
 
-    printf("Ingrese el directorio a analizar: \n"); //C:\\Users\\usuario\\OneDrive\\Escritorio\\Uni\\ODC\\proyecto
+    printf("Ingrese el directorio a analizar: \n"); //C:\\Users\\kunam\\Desktop\\Nacho\\ODC
     scanf("%s", dirNombre);
 
     DIR *directorio = malloc(sizeof(DIR));

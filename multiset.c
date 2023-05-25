@@ -13,6 +13,9 @@ multiset_t* multiset_crear(){
     multiset_t *devolver;
     devolver = malloc(sizeof(multiset_t));
     devolver ->cantidad = 0;
+    for (int i = 0; i< 26; i++){
+        devolver -> siguiente[i] = NULL;
+    }
     return devolver;}
 
 
@@ -73,11 +76,24 @@ lista_t multiset_elementos(multiset_t *m, int (*f)(elemento_t,elemento_t)){
     //lista_ordenar(l,(funcion_comparacion_t) *f);
     return *l;
 }
+//en base a la funcion insertada generar una funcion compatible con lista_ordenar
 
 void multiset_recorredor_m(multiset_t *m){
     for (int i = 0; i< (sizeof(m -> siguiente) / sizeof(m-> siguiente[0])); i++){
         multiset_recorredor_m(m->siguiente[i]);}
     free(m);
+}
+
+char toString(multiset_t *m, int l) {
+    char *devolver[255];
+    for(int j = 0; j < l; j++) {
+        for(int i = 0; i< (sizeof(m -> siguiente) / sizeof(m-> siguiente[0])); i++){
+            if(m-> siguiente[i] != NULL){
+                devolver[j] = (char) i+97;
+            }
+        }
+    }
+    return devolver;
 }
 
 //Elimina el multiset m liberando el espacio

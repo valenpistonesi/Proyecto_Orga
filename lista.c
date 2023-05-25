@@ -1,4 +1,4 @@
-
+#include <string.h>
 #include "lista.h"
 struct celda {
 elemento_t *elem;
@@ -32,6 +32,7 @@ int lista_insertar(lista_t *l, elemento_t elemen, unsigned int pos){
         celda_t *celda_nueva;
         celda_nueva = malloc(sizeof(celda_t));
         celda_nueva -> elem = &elemen;
+        celda_nueva -> siguiente = NULL;
 
         //Si es en la primera posicion
 
@@ -130,7 +131,7 @@ int lista_ordenar(lista_t *l, funcion_comparacion_t comparar){
 
 
 int funcion_comparacion_ejemplo(elemento_t *elem1, elemento_t *elem2) {
-    int devolver = NULL;
+    int devolver = 3;
 
     //compara la cantidad de veces que la palabra aparece
     if(elem1 -> a > elem2 -> a) {

@@ -60,3 +60,23 @@
 
 1684871229 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\multiset.h
 
+1684969017 source:c:\users\kunam\desktop\nacho\odc\main.c
+	<stdio.h>
+	<stdlib.h>
+	"lista.c"
+	"multiset.c"
+	<stdbool.h>
+	<dirent.h>
+	<unistd.h>
+
+1684967617 c:\users\kunam\desktop\nacho\odc\lista.c
+	<string.h>
+	"lista.h"
+
+1684963977 c:\users\kunam\desktop\nacho\odc\lista.h
+
+1684969334 c:\users\kunam\desktop\nacho\odc\multiset.c
+	"multiset.h"
+
+1684963977 c:\users\kunam\desktop\nacho\odc\multiset.h
+
