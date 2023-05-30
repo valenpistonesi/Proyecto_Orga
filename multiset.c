@@ -21,13 +21,16 @@ multiset_t* multiset_crear(){
 
 //Inserta la palabra s al multiset m.
 void multiset_insertar(multiset_t *m, char *s){
+    printf("\n");
     multiset_t *m_actual = m;
     for(int i = 0; s[i] != '\0'; i++){
         int letra_actual = s[i]- 97; //ascii, entiendo que se debe hacer una conversion directa
         if (m_actual -> siguiente[letra_actual] == NULL){
             m_actual -> siguiente[letra_actual] = multiset_crear();
             m_actual -> siguiente[letra_actual] -> cantidad = 1;
-            m_actual = m_actual-> siguiente[letra_actual];}
+            m_actual = m_actual-> siguiente[letra_actual];
+            printf("%c", s[i]);
+        }
         else{
             (m_actual-> siguiente[letra_actual])-> cantidad = (m_actual-> siguiente[letra_actual])->cantidad + 1;
             m_actual = m_actual-> siguiente[letra_actual];}}
@@ -38,7 +41,8 @@ int multiset_cantidad(multiset_t *m, char *s){
     int cantidad= 0;
     multiset_t *actual = m;
     if(s[0] !='\0' && actual -> siguiente[s[0] -97]!= NULL){
-        cantidad = (actual -> siguiente[s[0]-97]) -> cantidad;}
+        cantidad = (actual -> siguiente[s[0]-97]) -> cantidad;
+    }
 
     for(int i = 0; s[i] != '\0' && cantidad; i++){
          if(actual -> siguiente[s[i] -97]!= NULL){

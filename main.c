@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
+
 #include "lista.c"
 #include "multiset.c"
 #include <stdbool.h>
@@ -30,7 +29,6 @@ int obtener_palabras(char *filename ,multiset_t *m){
 
 
     for(int i=0; fgets(buffer, max_length, fp); i++) {
-            printf(buffer);
         multiset_insertar(m, buffer);
     }
 
