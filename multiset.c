@@ -21,7 +21,6 @@ multiset_t* multiset_crear(){
 
 //Inserta la palabra s al multiset m.
 void multiset_insertar(multiset_t *m, char *s){
-    printf("\n");
     multiset_t *m_actual = m;
     for(int i = 0; s[i] != '\0'; i++){
         int letra_actual = s[i]- 97; //ascii, entiendo que se debe hacer una conversion directa

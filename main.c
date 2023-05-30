@@ -15,7 +15,7 @@ bool tiene_extension_txt (char const *nombre) {
     return largo > 4 && strcmp(nombre + largo - 4, ".txt") == 0;
 }
 
-int obtener_palabras(char *filename ,multiset_t *m){
+int obtener_palabras(char *filename ,multiset_t *m, FILE *fptr, FILE *fptr2){
     FILE *fp = fopen(filename, "r");
 
     if (fp == NULL)
@@ -30,8 +30,11 @@ int obtener_palabras(char *filename ,multiset_t *m){
 
     for(int i=0; fgets(buffer, max_length, fp); i++) {
         multiset_insertar(m, buffer);
+        fprintf(fptr2, buffer);
+        fprintf(fptr, buffer);
     }
 
+    fclose(fp);
     return 0;
 }
 
@@ -57,15 +60,20 @@ int main() {
 
     struct dirent *ent;//estructura obtenida de readdir
     bool hay_txts = false;
+    FILE *fptr_cadauno = fopen ("cadauno.txt", "w");
+    FILE *fptr_totales = fopen ("totales.txt", "w");
 
     while ((ent = readdir (directorio)) != NULL) {//acceder a textos
         char *nombre_archivo = ent->d_name;
-        if(tiene_extension_txt(nombre_archivo)) {
+        if(tiene_extension_txt(nombre_archivo) && strcmp(nombre_archivo, "cadauno.txt") && strcmp(nombre_archivo, "totales.txt")) {
             printf(nombre_archivo);
+            fprintf(fptr_cadauno, nombre_archivo);
             printf(": \n\n");
-            obtener_palabras(nombre_archivo, m);
+            fprintf(fptr_cadauno, ": \n");
+            obtener_palabras(nombre_archivo, m, fptr_cadauno, fptr_totales);
             hay_txts = true;
             printf("\n\n");
+            fprintf(fptr_cadauno, "\n");
         }
     }
 
@@ -74,7 +82,8 @@ int main() {
         return -1;
     }
 
-
+    fclose(fptr_cadauno);
+    fclose(fptr_totales);
 
     /*while (aux.siguiente != NULL) {
         printf(aux.elem.a);
