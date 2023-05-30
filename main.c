@@ -30,32 +30,12 @@ int obtener_palabras(char *filename ,multiset_t *m){
 
 
     for(int i=0; fgets(buffer, max_length, fp); i++) {
+            printf(buffer);
         multiset_insertar(m, buffer);
-        printf(toString(m,7));
     }
-
-char palabra[tamano_palabra_maximo +1];
-    int j = 0;
-
-    for(int i=0; fgets(buffer, max_length, fp); i++) {
-
-        if( buffer[i]>=97 && buffer[i]<= 122 && j<tamano_palabra_maximo){
-            printf(buffer[i]);
-            palabra[j]= buffer[i];
-            j++;}
-        else{
-            palabra[j] = '\0';
-            printf("\n");
-            j = 0;
-            multiset_insertar(m,palabra);
-        }
-        printf("%s", buffer[i]);
-    }
-    multiset_insertar(m,palabra);
 
     return 0;
 }
-
 
 int main() {
 
@@ -90,9 +70,6 @@ int main() {
             printf("\n\n");
         }
     }
-
-
-
 
     if(hay_txts == false) {
         printf("\nno hay .txts en el directorio indicado");

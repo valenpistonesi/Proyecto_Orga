@@ -84,18 +84,6 @@ void multiset_recorredor_m(multiset_t *m){
     free(m);
 }
 
-char toString(multiset_t *m, int l) {
-    char *devolver[255];
-    for(int j = 0; j < l; j++) {
-        for(int i = 0; i< (sizeof(m -> siguiente) / sizeof(m-> siguiente[0])); i++){
-            if(m-> siguiente[i] != NULL){
-                devolver[j] = (char) i+97;
-            }
-        }
-    }
-    return devolver;
-}
-
 //Elimina el multiset m liberando el espacio
 //de memoria reservado. Luego de la invocaci´on m debe valer NULL.
 void multiset_eliminar(multiset_t **m){
