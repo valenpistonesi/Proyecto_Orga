@@ -61,14 +61,14 @@
 
 1685400067 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\multiset.h
 
-1685456839 source:c:\users\kunam\desktop\nacho\odc\main.c
+1685649308 source:c:\users\kunam\desktop\nacho\odc\main.c
 	"lista.c"
 	"multiset.c"
 	<stdbool.h>
 	<dirent.h>
 	<unistd.h>
 
-1685453459 c:\users\kunam\desktop\nacho\odc\lista.c
+1685650269 c:\users\kunam\desktop\nacho\odc\lista.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -76,7 +76,7 @@
 
 1684963977 c:\users\kunam\desktop\nacho\odc\lista.h
 
-1685455680 c:\users\kunam\desktop\nacho\odc\multiset.c
+1685652498 c:\users\kunam\desktop\nacho\odc\multiset.c
 	"multiset.h"
 
 1684963977 c:\users\kunam\desktop\nacho\odc\multiset.h

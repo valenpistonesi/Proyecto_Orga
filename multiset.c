@@ -51,22 +51,22 @@ int multiset_cantidad(multiset_t *m, char *s){
     return cantidad;}
 
 void multiset_recorredor_e(multiset_t *m, lista_t *l, char* p, int cant){
-    for(int i; i< 26; i++){
+    /*for(int i = 0; i< 26; i++){
         if(m-> siguiente[i] != NULL){
             p[cant] = i+97;
             cant++;
-            char *pal[cant];
+            char pal[cant];
             elemento_t *elem;
             elem = malloc(sizeof(elemento_t));
             for(int j = 0; j< cant; j++){
-                *pal[j] = p[j];}
-            p[cant-1] = '\0';
-            elem -> b = *pal;
+                pal[j] = p[j];}
+            p[cant] = '\0';
+            elem -> b = pal;
             elem -> a = m -> cantidad;
             lista_insertar(l, *elem ,lista_cantidad(l));
             multiset_recorredor_e(m -> siguiente[i], l, p,cant);
         }
-    }
+    }*/
 }
 //Devuelve una lista de tipo lista t ordenada segun la funcion f con todos los elementos del
 //multiset m y la cantidad de apariciones de cada uno.

@@ -39,7 +39,7 @@ int lista_insertar(lista_t *l, elemento_t elemen, unsigned int pos){
         //Si es en la primera posicion
 
         if(pos == 0){
-            celda_nueva -> siguiente = l -> primera -> siguiente;
+            celda_nueva -> siguiente = l -> primera;
             free(l-> primera);
             l-> primera = celda_nueva;
 
