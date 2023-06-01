@@ -15,35 +15,43 @@ bool tiene_extension_txt (char const *nombre) {
     return largo > 4 && strcmp(nombre + largo - 4, ".txt") == 0;
 }
 
-int obtener_palabras(char *filename ,multiset_t *m, FILE *fptr, FILE *fptr2, char buffer_g){
+//metodo que llena un multiset con las palabras del archivo insetado
+void llenar_totales (multiset_t *m, char *filename){
     FILE *fp = fopen(filename, "r");
-
-    if (fp == NULL)
-    {
-        printf("Error: could not open file %s", filename);
-        return 1;
+    if (fp == NULL){
+        printf("Error: no se puede abrir el archivo (llenar totales) %s", filename);
     }
-
-    // reading line by line, max 256 bytes
+    //fgetc leer char
     char buffer[tamano_palabra_maximo];
-
+    char palabra[tamano_palabra_maximo];
     for(int i=0; fgets(buffer, max_length, fp); i++) {
-        multiset_insertar(m, buffer);
-        buffer_g = strcat(buffer_g, buffer);
-    }
+        int j = 0;
+        int k = 0;
 
-    lista_t l = multiset_elementos(m,NULL);
-    lista_t* l_p = &l;
+        while(buffer[j] != '\0' && buffer[j] != '\n'){
+            if(buffer[j]>= 97 && buffer[j]<= 122){
+                palabra[k] = buffer[j];
+                k++;}
+            else{
+                palabra[k] = '\0';
+                multiset_insertar(m, palabra);
+                k = 0;
+            }
+            j++;}
+        palabra[k] = '\0';
+        multiset_insertar(m, palabra);}}
 
-    lista_ordenar (l_p,funcion_comparacion_ejemplo);
 
-    for(unsigned int i=0; i < lista_cantidad(l_p); i++) {
-        fprintf(fptr2, lista_elemento(l_p,i)->b);
-        fprintf(fptr, lista_elemento(l_p,i)->b);
-    }
+//imprime los contenidos de la lista
+void imprimir_lista(lista_t *l, FILE *filename){
+    celda_t *actual = l->primera;
+    while(actual != NULL){
+        fprintf(filename, "%i",actual-> elem -> a );
+        fprintf(filename,"  ");
+        fprintf(filename, actual-> elem -> b);
+        fprintf(filename,"\n");
 
-    fclose(fp);
-    return 0;
+        actual = actual -> siguiente;}
 }
 
 int main() {
@@ -64,25 +72,37 @@ int main() {
         return -1;
     }
 
-    multiset_t *m = multiset_crear();
-
     struct dirent *ent;//estructura obtenida de readdir
     bool hay_txts = false;
     FILE *fptr_cadauno = fopen ("cadauno.txt", "w");
     FILE *fptr_totales = fopen ("totales.txt", "w");
-    char buffer_g[tamano_palabra_maximo];
 
-    while ((ent = readdir (directorio)) != NULL) {//acceder a textos
+    multiset_t *totales_m = multiset_crear();
+    multiset_t *cada_uno_m = multiset_crear();
+
+    while ((ent = readdir (directorio)) != NULL) {//acceder a textos, mientras haya archivos no analizados
         char *nombre_archivo = ent->d_name;
         if(tiene_extension_txt(nombre_archivo) && strcmp(nombre_archivo, "cadauno.txt") && strcmp(nombre_archivo, "totales.txt")) {
-            printf(nombre_archivo);
+            llenar_totales(totales_m, nombre_archivo);
+            llenar_totales(cada_uno_m, nombre_archivo);
+
+            lista_t lcu = multiset_elementos(cada_uno_m, NULL);
+            lista_ordenar(&lcu, funcion_comparacion_ejemplo);
+
             fprintf(fptr_cadauno, nombre_archivo);
+            fprintf(fptr_cadauno,"\n");
+            imprimir_lista(&lcu, fptr_cadauno);
+
+
+            /*printf(nombre_archivo);
+            fprintf(fptr_cadauno, nombre_archivo); // imprimir en archivo de texto
             printf(": \n\n");
-            fprintf(fptr_cadauno, ": \n");
+
             obtener_palabras(nombre_archivo, m, fptr_cadauno, fptr_totales, buffer_g);
             hay_txts = true;
             printf("\n\n");
-            fprintf(fptr_cadauno, "\n");
+            fprintf(fptr_cadauno, "\n");*/
+
         }
     }
 
@@ -94,46 +114,4 @@ int main() {
     fclose(fptr_cadauno);
     fclose(fptr_totales);
 
-    /*while (aux.siguiente != NULL) {
-        printf(aux.elem.a);
-        printf(" | ");
-        printf(aux.elem.b);
-        aux = aux.siguiente();
-    }*/
-
-
-    //$ cuentapalbras [-h][directorio de entrada]
-    /*char *filename = "readme.txt";
-    FILE *fp = fopen(filename, "r");
-    FILE *fptr = fopen ("nuevo.txt", "w");*/
-
-
-
-
-/*    if (fp == NULL)
-    {
-        printf("Error: could not open file %s", filename);
-        return 1;
-    }
-
-    // reading line by line, max 256 bytes
-    const unsigned MAX_LENGTH = 256;
-    char buffer[MAX_LENGTH];
-    char array [7][40], s[100];
-
-    for(int i=0; fgets(buffer, MAX_LENGTH, fp); i++) {
-        strcpy(array[i], buffer);
-        fputs(array[i], fptr);
-        printf("%s", array[i]);
-    }
-
-
-    printf("%s","   ");
-
-    fclose(fptr);
-    // close the file
-    fclose(fp);*/
-    return 0;
-
-
-}
+    return 0;}

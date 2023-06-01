@@ -51,7 +51,7 @@ int multiset_cantidad(multiset_t *m, char *s){
     return cantidad;}
 
 void multiset_recorredor_e(multiset_t *m, lista_t *l, char* p, int cant){
-    for(int i; i< (sizeof(m -> siguiente) / sizeof(m-> siguiente[0])); i++){
+    for(int i; i< 26; i++){
         if(m-> siguiente[i] != NULL){
             p[cant] = i+97;
             cant++;
