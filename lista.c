@@ -132,7 +132,7 @@ int lista_ordenar(lista_t *l, funcion_comparacion_t comparar){
     return 0;}
 
 
-int funcion_comparacion_ejemplo(elemento_t *elem1, elemento_t *elem2) {
+comparacion_resultado_t funcion_comparacion_ejemplo(elemento_t *elem1, elemento_t *elem2) {
     int devolver = 3;
 
     //compara la cantidad de veces que la palabra aparece
