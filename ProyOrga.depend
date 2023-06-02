@@ -81,3 +81,43 @@
 
 1684963977 c:\users\kunam\desktop\nacho\odc\multiset.h
 
+1685658250 source:c:\users\usuario\desktop\orga 26 5\main.c
+	"lista.c"
+	"multiset.c"
+	<stdbool.h>
+	<dirent.h>
+	<unistd.h>
+
+1685658250 c:\users\usuario\desktop\orga 26 5\lista.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lista.h"
+
+1685135577 c:\users\usuario\desktop\orga 26 5\lista.h
+
+1685658631 c:\users\usuario\desktop\orga 26 5\multiset.c
+	"multiset.h"
+
+1685135577 c:\users\usuario\desktop\orga 26 5\multiset.h
+
+1685663912 source:c:\users\usuario\desktop\orga\main.c
+	"lista.c"
+	"multiset.c"
+	<stdbool.h>
+	<dirent.h>
+	<unistd.h>
+
+1685669780 c:\users\usuario\desktop\orga\lista.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lista.h"
+
+1685135577 c:\users\usuario\desktop\orga\lista.h
+
+1685670438 c:\users\usuario\desktop\orga\multiset.c
+	"multiset.h"
+
+1685135577 c:\users\usuario\desktop\orga\multiset.h
+

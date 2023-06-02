@@ -28,7 +28,6 @@ void multiset_insertar(multiset_t *m, char *s){
             m_actual -> siguiente[letra_actual] = multiset_crear();
             m_actual -> siguiente[letra_actual] -> cantidad = 1;
             m_actual = m_actual-> siguiente[letra_actual];
-            printf("%c", s[i]);
         }
         else{
             (m_actual-> siguiente[letra_actual])-> cantidad = (m_actual-> siguiente[letra_actual])->cantidad + 1;
@@ -50,8 +49,8 @@ int multiset_cantidad(multiset_t *m, char *s){
          else cantidad = 0;}
     return cantidad;}
 
-void multiset_recorredor_e(multiset_t *m, lista_t *l, char* p, int cant){
-    /*for(int i = 0; i< 26; i++){
+/*void multiset_recorredor_e(multiset_t *m, lista_t *l, char* p, int cant){
+    for(int i = 0; i< 26; i++){
         if(m-> siguiente[i] != NULL){
             p[cant] = i+97;
             cant++;
@@ -64,9 +63,43 @@ void multiset_recorredor_e(multiset_t *m, lista_t *l, char* p, int cant){
             elem -> b = pal;
             elem -> a = m -> cantidad;
             lista_insertar(l, *elem ,lista_cantidad(l));
+            lista_toString(l);
             multiset_recorredor_e(m -> siguiente[i], l, p,cant);
         }
-    }*/
+    }
+}*/
+void multiset_recorredor_e(multiset_t *m, lista_t *l, char* p, int cant){
+    int hoja = 1;
+    for(int i = 0; i< 26; i++){
+        if(m-> siguiente[i] != NULL){
+            hoja = 0;
+            p[cant] = i+97;
+            cant++;
+            if(m->cantidad != m->siguiente[i]->cantidad){
+                char palabra[cant];
+                elemento_t *elem;
+                elem = malloc(sizeof(elemento_t));
+                for(int j = 0; j< cant; j++){
+                    palabra[j] = p[j];}
+                palabra[cant] = '\0';
+                elem -> b = palabra;
+                elem -> a = m -> cantidad;
+                //printf("%d",lista_cantidad(l));
+                lista_insertar(l, *elem ,lista_cantidad(l));}
+
+            multiset_recorredor_e(m -> siguiente[i], l, p,cant);}}
+
+    if(hoja == 0){
+        char palabra[cant];
+                elemento_t *elem;
+                elem = malloc(sizeof(elemento_t));
+                for(int j = 0; j< cant; j++){
+                    palabra[j] = p[j];}
+                palabra[cant] = '\0';
+                elem -> b = palabra;
+                elem -> a = m -> cantidad;
+                lista_insertar(l, *elem ,lista_cantidad(l));
+    }
 }
 //Devuelve una lista de tipo lista t ordenada segun la funcion f con todos los elementos del
 //multiset m y la cantidad de apariciones de cada uno.

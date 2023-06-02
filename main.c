@@ -8,7 +8,7 @@
 #define max_length 255
 
 //REVISAR: inicializar todo como null
-//
+//C:\\Users\\Usuario\\Desktop\\orga
 
 bool tiene_extension_txt (char const *nombre) {
     size_t largo = strlen(nombre);
@@ -87,6 +87,7 @@ int main() {
             llenar_totales(cada_uno_m, nombre_archivo);
 
             lista_t lcu = multiset_elementos(cada_uno_m, NULL);
+            printf("%d",lista_cantidad(&lcu));
             lista_ordenar(&lcu, funcion_comparacion_ejemplo);
 
             fprintf(fptr_cadauno, nombre_archivo);
