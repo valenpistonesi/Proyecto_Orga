@@ -61,7 +61,7 @@ int main() {
 
     char *dirNombre = malloc(sizeof(char) * 50); //directorios a leer
 
-    printf("Ingrese el directorio a analizar: \n"); //C:\\Users\\kunam\\Desktop\\Nacho\\ODC
+    printf("Ingrese el directorio a analizar: \n"); //C:\\Users\\usuario\\OneDrive\\Escritorio\\Uni\\ODC\\proyecto
     scanf("%s", dirNombre);
 
     DIR *directorio = malloc(sizeof(DIR));

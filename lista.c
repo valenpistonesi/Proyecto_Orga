@@ -64,6 +64,17 @@ int lista_insertar(lista_t *l, elemento_t elemen, unsigned int pos){
                     l->cantidad = l->cantidad + 1;
                     celda_ant -> siguiente = celda_nueva;}}
 
+
+            printf("celda numero ");
+            printf("%i", pos);
+            printf("\n");
+            printf("elem: \n");
+            printf("a: ");
+            printf("%i", celda_nueva->elem->a);
+            printf("  ");
+            printf("b: ");
+            printf(celda_nueva->elem->b);
+            printf("\n");
             return 1;
         }
 
