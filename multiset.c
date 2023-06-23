@@ -37,7 +37,8 @@ void multiset_insertar(multiset_t *m, char *s){
 //Devuelve la cantidad de repeticiones de la palabra s en el multiset m.
 int multiset_cantidad(multiset_t *m, char *s){
     int cantidad= 0;
-    multiset_t *actual = m;
+    multiset_t *actual = malloc(sizeof(multiset_t));
+    actual =m;
     if(s[0] !='\0' && actual -> siguiente[s[0] -97]!= NULL){
         cantidad = (actual -> siguiente[s[0]-97]) -> cantidad;
     }
@@ -68,7 +69,7 @@ int multiset_cantidad(multiset_t *m, char *s){
         }
     }
 }*/
-void multiset_recorredor_e(multiset_t *m, lista_t *l, char* p, int cant){
+/*void multiset_recorredor_e(multiset_t *m, lista_t *l, char* p, int cant){
     int hoja = 1;
     for(int i = 0; i< 26; i++){
         if(m-> siguiente[i] != NULL){
@@ -94,7 +95,7 @@ void multiset_recorredor_e(multiset_t *m, lista_t *l, char* p, int cant){
                 elemento_t *elem;
                 elem = malloc(sizeof(elemento_t));
                 for(int j = 0; j< cant; j++){
-                    palabra[j] = p[j];}
+                    palabra[j] = p[j];}0
                 palabra[cant] = '\0';
                 elem -> b = palabra;
                 elem -> a = m -> cantidad;
@@ -111,6 +112,32 @@ lista_t multiset_elementos(multiset_t *m, int (*f)(elemento_t,elemento_t)){
     multiset_recorredor_e(m,l,*p,cant);
     //lista_ordenar(l,(funcion_comparacion_t) *f);
     return *l;
+}*/
+void insertarPreOrdenAux(multiset_t *arbol, lista_t *lista, char *palabra, int nivel){
+    elemento_t *elemAux = malloc(sizeof(elemento_t));
+    elemAux -> b = malloc(sizeof(char));
+    if(arbol -> cantidad>0 ){
+        palabra [nivel] = '\0';
+        elemAux->a = arbol-> cantidad;
+        elemAux->b = strdup(palabra);
+        lista_insertar (lista, *elemAux, lista_cantidad(lista));
+    }
+    for (int pos = 0; pos < 26; pos++){
+        if(arbol -> siguiente[pos] != NULL){
+            palabra [nivel]= 97 +pos;
+            insertarPreOrdenAux(arbol ->siguiente [pos], lista,palabra, nivel +1);
+        }
+    }
+}
+
+lista_t multiset_elementos(multiset_t *m, comparacion_resultado_t (*f)(elemento_t*, elemento_t*)){
+    lista_t *l = malloc(sizeof(lista_t));
+    l =lista_crear();
+    char *palabra = malloc(sizeof(char));
+
+    insertarPreOrdenAux(m, l, palabra, 0);
+    printf("holaaaaaa %s",lista_elemento(l,3)-> b);
+    return *l;
 }
 //en base a la funcion insertada generar una funcion compatible con lista_ordenar
 
@@ -124,6 +151,7 @@ void multiset_recorredor_m(multiset_t *m){
 //de memoria reservado. Luego de la invocaci´on m debe valer NULL.
 void multiset_eliminar(multiset_t **m){
     multiset_recorredor_m(*m);
+    free(m);
 
 }
 

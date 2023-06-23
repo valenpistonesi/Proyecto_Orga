@@ -23,6 +23,16 @@ lista_t* lista_crear(){
     return nueva_lista;
 }
 
+//Devuelve un puntero al elemento que ocupa la posicion pos de la lista
+elemento_t* lista_elemento(lista_t *l, unsigned int pos){
+    if(l->cantidad > pos){
+        celda_t *celda_aux = malloc(sizeof(celda_t));
+        celda_aux = l-> primera;
+        for(int i = 0; i < pos; i++){
+            celda_aux = celda_aux -> siguiente;}
+        return celda_aux -> elem;}
+    else return NULL;}
+
 int lista_vacia(lista_t lista)  {
     return lista.cantidad == 0;
 }
@@ -34,6 +44,7 @@ int lista_insertar(lista_t *l, elemento_t elemen, unsigned int pos){
 
         celda_t *celda_nueva;
         celda_nueva = malloc(sizeof(celda_t));
+        celda_nueva ->elem = malloc(sizeof(elemento_t));
         celda_nueva -> elem = &elemen;
         celda_nueva -> siguiente = NULL;
 
@@ -49,8 +60,10 @@ int lista_insertar(lista_t *l, elemento_t elemen, unsigned int pos){
 
         }else{
              //Si es en otra posicion
-             celda_t *celda_aux = l-> primera;
-             celda_t *celda_ant = NULL;
+             celda_t *celda_aux = malloc(sizeof(celda_t));
+             celda_aux =l-> primera;
+             celda_t *celda_ant = malloc(sizeof(celda_t));
+             celda_ant = NULL;
 
              for(int i = 0; i < pos; i++){
                 celda_ant = celda_aux;
@@ -70,10 +83,12 @@ int lista_insertar(lista_t *l, elemento_t elemen, unsigned int pos){
             printf("\n");
             printf("elem: \n");
             printf("a: ");
-            printf("%i", celda_nueva->elem->a);
+            printf("%i", lista_elemento(l,pos)->a);
             printf("  ");
             printf("b: ");
-            printf(celda_nueva->elem->b);
+            //printf(celda_nueva->elem->b);
+            printf(lista_elemento(l,pos)->b);
+
             printf("\n");
             return 1;
         }
@@ -84,8 +99,8 @@ int lista_insertar(lista_t *l, elemento_t elemen, unsigned int pos){
 //Elimina el elemento de la posicion pos de la lista.
 elemento_t* lista_eliminar(lista_t *l, unsigned int pos){
     if(l->cantidad > pos){
-        elemento_t *devolver;
-        celda_t *celda_aux;
+        elemento_t *devolver = malloc(sizeof(elemento_t));
+        celda_t *celda_aux = malloc(sizeof(celda_t));
         if(pos == 0){
             celda_aux = l-> primera;
             l -> primera = (l-> primera) -> siguiente;
@@ -109,14 +124,7 @@ elemento_t* lista_eliminar(lista_t *l, unsigned int pos){
     return NULL;
 }
 
-//Devuelve un puntero al elemento que ocupa la posicion pos de la lista
-elemento_t* lista_elemento(lista_t *l, unsigned int pos){
-    if(l->cantidad > pos){
-        celda_t *celda_aux = l-> primera;
-        for(int i = 0; i < pos; i++){
-            celda_aux = celda_aux -> siguiente;}
-        return celda_aux -> elem;}
-    else return NULL;}
+
 
 //Devuelve la cantidad de elementos de la lista l.
 unsigned int lista_cantidad(lista_t *l) {
@@ -124,7 +132,8 @@ unsigned int lista_cantidad(lista_t *l) {
 }
 
 void lista_intercambiar(lista_t *l,int pos1, int pos2){
-    elemento_t * e1 = lista_elemento(l,pos1);
+    elemento_t * e1 = malloc (sizeof(elemento_t));
+    e1 = lista_elemento(l,pos1);
     lista_insertar(l, *lista_elemento(l,pos2), pos1);
     lista_insertar(l, *e1, pos2);}
 
@@ -165,7 +174,8 @@ comparacion_resultado_t funcion_comparacion_ejemplo(elemento_t *elem1, elemento_
 }
 
 void lista_toString(lista_t *l){
-    celda_t *actual = l-> primera;
+    celda_t *actual = malloc (sizeof(celda_t));
+    actual= l-> primera;
     while(actual != NULL){
         printf(actual ->elem -> b);
         actual = actual->siguiente;

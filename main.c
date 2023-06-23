@@ -8,7 +8,7 @@
 #define max_length 255
 
 //REVISAR: inicializar todo como null
-//C:\\Users\\Usuario\\Desktop\\orga
+//C:\\Users\\Usuario\\Desktop\\oc
 
 bool tiene_extension_txt (char const *nombre) {
     size_t largo = strlen(nombre);
@@ -44,7 +44,8 @@ void llenar_totales (multiset_t *m, char *filename){
 
 //imprime los contenidos de la lista
 void imprimir_lista(lista_t *l, FILE *filename){
-    celda_t *actual = l->primera;
+    celda_t *actual = malloc(sizeof(celda_t));
+    actual = l->primera;
     while(actual != NULL){
         fprintf(filename, "%i",actual-> elem -> a );
         fprintf(filename,"  ");
@@ -86,13 +87,16 @@ int main() {
             llenar_totales(totales_m, nombre_archivo);
             llenar_totales(cada_uno_m, nombre_archivo);
 
-            lista_t lcu = multiset_elementos(cada_uno_m, NULL);
-            printf("%d",lista_cantidad(&lcu));
-            lista_ordenar(&lcu, funcion_comparacion_ejemplo);
+            lista_t *lcu = malloc(sizeof(lista_t));
+            *lcu = multiset_elementos(cada_uno_m, NULL);
+            printf("se esta por llamar ee");
+            printf(lista_elemento(lcu,3)-> b);
+            printf("%d se llama a ordenar",lista_cantidad(lcu));
+            lista_ordenar(lcu, funcion_comparacion_ejemplo);
 
             fprintf(fptr_cadauno, nombre_archivo);
             fprintf(fptr_cadauno,"\n");
-            imprimir_lista(&lcu, fptr_cadauno);
+            imprimir_lista(lcu, fptr_cadauno);
 
 
             /*printf(nombre_archivo);
