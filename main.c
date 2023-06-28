@@ -87,10 +87,11 @@ int main() {
             llenar_totales(totales_m, nombre_archivo);
             llenar_totales(cada_uno_m, nombre_archivo);
 
-            lista_t *lcu = malloc(sizeof(lista_t));
+            lista_t *lcu = lista_crear();
             *lcu = multiset_elementos(cada_uno_m, NULL);
-            printf("se esta por llamar ee");
-            printf(lista_elemento(lcu,3)-> b);
+            printf("se esta por llamar ee\n");
+            printf("lista_elemento", lista_elemento(lcu,3) -> b);
+
             printf("%d se llama a ordenar",lista_cantidad(lcu));
             lista_ordenar(lcu, funcion_comparacion_ejemplo);
 

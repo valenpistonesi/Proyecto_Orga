@@ -28,9 +28,10 @@ elemento_t* lista_elemento(lista_t *l, unsigned int pos){
     if(l->cantidad > pos){
         celda_t *celda_aux = malloc(sizeof(celda_t));
         celda_aux = l-> primera;
-        int aux = l->primera->elem->a;
+        elemento_t aux2 = *celda_aux -> elem;
         for(int i = 0; i < pos; i++){
             celda_aux = celda_aux -> siguiente;}
+        elemento_t aux = *celda_aux -> elem;
         return celda_aux -> elem;}
     else return NULL;}
 
