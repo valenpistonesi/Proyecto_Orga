@@ -28,6 +28,7 @@ elemento_t* lista_elemento(lista_t *l, unsigned int pos){
     if(l->cantidad > pos){
         celda_t *celda_aux = malloc(sizeof(celda_t));
         celda_aux = l-> primera;
+        int aux = l->primera->elem->a;
         for(int i = 0; i < pos; i++){
             celda_aux = celda_aux -> siguiente;}
         return celda_aux -> elem;}
@@ -41,10 +42,9 @@ int lista_vacia(lista_t lista)  {
 int lista_insertar(lista_t *l, elemento_t elemen, unsigned int pos){
     if(l -> cantidad >= pos){
 
-
         celda_t *celda_nueva;
         celda_nueva = malloc(sizeof(celda_t));
-        celda_nueva ->elem = malloc(sizeof(elemento_t));
+        celda_nueva -> elem = malloc(sizeof(elemento_t));
         celda_nueva -> elem = &elemen;
         celda_nueva -> siguiente = NULL;
 
@@ -52,6 +52,8 @@ int lista_insertar(lista_t *l, elemento_t elemen, unsigned int pos){
 
         if(pos == 0){
             celda_nueva -> siguiente = l -> primera;
+            celda_nueva -> elem = &elemen;
+            int aux = celda_nueva -> elem -> a;
             free(l-> primera);
             l-> primera = celda_nueva;
 
@@ -173,7 +175,7 @@ comparacion_resultado_t funcion_comparacion_ejemplo(elemento_t *elem1, elemento_
     return devolver;
 }
 
-void lista_toString(lista_t *l){
+/*void lista_toString(lista_t *l){
     celda_t *actual = malloc (sizeof(celda_t));
     actual= l-> primera;
     while(actual != NULL){
@@ -181,6 +183,6 @@ void lista_toString(lista_t *l){
         actual = actual->siguiente;
     }
 
-}
+}*/
 //fin implementacion
 

@@ -113,7 +113,7 @@ lista_t multiset_elementos(multiset_t *m, int (*f)(elemento_t,elemento_t)){
     //lista_ordenar(l,(funcion_comparacion_t) *f);
     return *l;
 }*/
-void insertarPreOrdenAux(multiset_t *arbol, lista_t *lista, char *palabra, int nivel){
+lista_t* insertarPreOrdenAux(multiset_t *arbol, lista_t *lista, char *palabra, int nivel){
     elemento_t *elemAux = malloc(sizeof(elemento_t));
     elemAux -> b = malloc(sizeof(char));
     if(arbol -> cantidad>0 ){
@@ -124,19 +124,19 @@ void insertarPreOrdenAux(multiset_t *arbol, lista_t *lista, char *palabra, int n
     }
     for (int pos = 0; pos < 26; pos++){
         if(arbol -> siguiente[pos] != NULL){
-            palabra [nivel]= 97 +pos;
+            palabra [nivel]= 97 + pos;
             insertarPreOrdenAux(arbol ->siguiente [pos], lista,palabra, nivel +1);
         }
     }
+
+    return lista;
 }
 
 lista_t multiset_elementos(multiset_t *m, comparacion_resultado_t (*f)(elemento_t*, elemento_t*)){
     lista_t *l = malloc(sizeof(lista_t));
     l =lista_crear();
     char *palabra = malloc(sizeof(char));
-
-    insertarPreOrdenAux(m, l, palabra, 0);
-    printf("holaaaaaa %s",lista_elemento(l,3)-> b);
+    l = insertarPreOrdenAux(m, l, palabra, 0);
     return *l;
 }
 //en base a la funcion insertada generar una funcion compatible con lista_ordenar
