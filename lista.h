@@ -31,7 +31,7 @@ elemento_t* lista_elemento(lista_t *l, unsigned int pos);
 
 int lista_vacia(lista_t lista);
 
-int lista_insertar(lista_t *l, elemento_t elemen, unsigned int pos);
+int lista_insertar(lista_t *l, elemento_t *elemen, unsigned int pos);
 
 elemento_t* lista_eliminar(lista_t *l, unsigned int pos);
 

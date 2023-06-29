@@ -50,83 +50,40 @@ int multiset_cantidad(multiset_t *m, char *s){
          else cantidad = 0;}
     return cantidad;}
 
-/*void multiset_recorredor_e(multiset_t *m, lista_t *l, char* p, int cant){
-    for(int i = 0; i< 26; i++){
-        if(m-> siguiente[i] != NULL){
-            p[cant] = i+97;
-            cant++;
-            char pal[cant];
-            elemento_t *elem;
-            elem = malloc(sizeof(elemento_t));
-            for(int j = 0; j< cant; j++){
-                pal[j] = p[j];}
-            p[cant] = '\0';
-            elem -> b = pal;
-            elem -> a = m -> cantidad;
-            lista_insertar(l, *elem ,lista_cantidad(l));
-            lista_toString(l);
-            multiset_recorredor_e(m -> siguiente[i], l, p,cant);
-        }
-    }
-}*/
-/*void multiset_recorredor_e(multiset_t *m, lista_t *l, char* p, int cant){
-    int hoja = 1;
-    for(int i = 0; i< 26; i++){
-        if(m-> siguiente[i] != NULL){
-            hoja = 0;
-            p[cant] = i+97;
-            cant++;
-            if(m->cantidad != m->siguiente[i]->cantidad){
-                char palabra[cant];
-                elemento_t *elem;
-                elem = malloc(sizeof(elemento_t));
-                for(int j = 0; j< cant; j++){
-                    palabra[j] = p[j];}
-                palabra[cant] = '\0';
-                elem -> b = palabra;
-                elem -> a = m -> cantidad;
-                //printf("%d",lista_cantidad(l));
-                lista_insertar(l, *elem ,lista_cantidad(l));}
-
-            multiset_recorredor_e(m -> siguiente[i], l, p,cant);}}
-
-    if(hoja == 0){
-        char palabra[cant];
-                elemento_t *elem;
-                elem = malloc(sizeof(elemento_t));
-                for(int j = 0; j< cant; j++){
-                    palabra[j] = p[j];}0
-                palabra[cant] = '\0';
-                elem -> b = palabra;
-                elem -> a = m -> cantidad;
-                lista_insertar(l, *elem ,lista_cantidad(l));
-    }
-}
-//Devuelve una lista de tipo lista t ordenada segun la funcion f con todos los elementos del
-//multiset m y la cantidad de apariciones de cada uno.
-lista_t multiset_elementos(multiset_t *m, int (*f)(elemento_t,elemento_t)){
-    lista_t *l;
-    l= lista_crear();
-    char *p[30];
-    int cant = 0;
-    multiset_recorredor_e(m,l,*p,cant);
-    //lista_ordenar(l,(funcion_comparacion_t) *f);
-    return *l;
-}*/
 lista_t* insertarPreOrdenAux(multiset_t *arbol, lista_t *lista, char *palabra, int nivel){
-    elemento_t elemAux;
-    //elemAux -> b = malloc(sizeof(char));
+    elemento_t* elemAux;
+    elemAux = malloc(sizeof(elemento_t));
 
     if(arbol -> cantidad>0 ){
         palabra [nivel] = '\0';
-        elemAux.a = arbol-> cantidad;
-        elemAux.b = strdup(palabra);
+        elemAux -> a = arbol-> cantidad;
+        elemAux -> b = strdup(palabra);
         lista_insertar (lista, elemAux, lista_cantidad(lista));
+        printf("celda numero ");
+        printf("%i", nivel);
+        printf("\n");
+        printf("elem: \n");
+        printf("a: ");
+        printf("%i", lista_elemento(lista,nivel)->a);
+        printf("  ");
+        printf("b: ");
+        //printf(celda_nueva->elem->b);
+        printf(lista_elemento(lista,nivel)->b);
     }
     for (int pos = 0; pos < 26; pos++){
         if(arbol -> siguiente[pos] != NULL){
             palabra [nivel]= 97 + pos;
             insertarPreOrdenAux(arbol ->siguiente [pos], lista,palabra, nivel +1);
+            printf("celda numero ");
+            printf("%i", nivel);
+            printf("\n");
+            printf("elem: \n");
+            printf("a: ");
+            printf("%i", lista_elemento(lista,nivel)->a);
+            printf("  ");
+            printf("b: ");
+            //printf(celda_nueva->elem->b);
+            printf(lista_elemento(lista,nivel)->b);
         }
     }
 
