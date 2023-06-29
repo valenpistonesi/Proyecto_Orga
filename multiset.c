@@ -53,28 +53,29 @@ int multiset_cantidad(multiset_t *m, char *s){
 lista_t* insertarPreOrdenAux(multiset_t *arbol, lista_t *lista, char *palabra, int nivel){
     elemento_t* elemAux;
     elemAux = malloc(sizeof(elemento_t));
+    elemAux -> b = malloc(sizeof(char)*256);
 
     if(arbol -> cantidad>0 ){
         palabra [nivel] = '\0';
         elemAux -> a = arbol-> cantidad;
         elemAux -> b = strdup(palabra);
         lista_insertar (lista, elemAux, lista_cantidad(lista));
-        printf("celda numero ");
+        /*printf("celda numero");
         printf("%i", nivel);
         printf("\n");
         printf("elem: \n");
         printf("a: ");
-        printf("%i", lista_elemento(lista,nivel)->a);
+        printf("%d", lista_elemento(lista,lista_cantidad(lista)-1)->a);
         printf("  ");
         printf("b: ");
         //printf(celda_nueva->elem->b);
-        printf(lista_elemento(lista,nivel)->b);
+        printf(lista_elemento(lista,lista_cantidad(lista)-1)->b);*/
     }
     for (int pos = 0; pos < 26; pos++){
         if(arbol -> siguiente[pos] != NULL){
             palabra [nivel]= 97 + pos;
             insertarPreOrdenAux(arbol ->siguiente [pos], lista,palabra, nivel +1);
-            printf("celda numero ");
+            /*printf("celda numero ");
             printf("%i", nivel);
             printf("\n");
             printf("elem: \n");
@@ -83,7 +84,7 @@ lista_t* insertarPreOrdenAux(multiset_t *arbol, lista_t *lista, char *palabra, i
             printf("  ");
             printf("b: ");
             //printf(celda_nueva->elem->b);
-            printf(lista_elemento(lista,nivel)->b);
+            printf(lista_elemento(lista,nivel)->b);*/
         }
     }
 
@@ -96,11 +97,11 @@ lista_t multiset_elementos(multiset_t *m, comparacion_resultado_t (*f)(elemento_
     l = insertarPreOrdenAux(m, l, palabra, 0);
 
     printf("multiset elementos\n");
-    for (int i=0; i<lista_cantidad(l); i++)
+    /*for (int i=0; i<lista_cantidad(l); i++)
     {
         printf("%s\n", lista_elemento(l, i)->b);
     }
-    printf("multiset elementos\n");
+    printf("multiset elementos\n");*/
 
     return *l;
 }

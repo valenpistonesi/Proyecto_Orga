@@ -26,12 +26,10 @@ lista_t* lista_crear(){
 //Devuelve un puntero al elemento que ocupa la posicion pos de la lista
 elemento_t* lista_elemento(lista_t *l, unsigned int pos){
     if(l->cantidad > pos){
-        celda_t *celda_aux = malloc(sizeof(celda_t));
+        celda_t *celda_aux;
         celda_aux = l-> primera;
-        elemento_t aux2 = *celda_aux -> elem;
         for(int i = 0; i < pos; i++){
             celda_aux = celda_aux -> siguiente;}
-        elemento_t aux = *celda_aux -> elem;
         return celda_aux -> elem;}
     else return NULL;}
 
@@ -52,9 +50,6 @@ int lista_insertar(lista_t *l, elemento_t *elemen, unsigned int pos){
 
         if(pos == 0){
             celda_nueva -> siguiente = l -> primera;
-            celda_nueva -> elem = elemen;
-            int aux = celda_nueva -> elem -> a;
-            free(l -> primera);
             l-> primera = celda_nueva;
 
             if(lista_vacia(*l) != 0){
@@ -62,11 +57,9 @@ int lista_insertar(lista_t *l, elemento_t *elemen, unsigned int pos){
 
         }else{
              //Si es en otra posicion
-             celda_t *celda_aux = malloc(sizeof(celda_t));
+             celda_t *celda_aux;
              celda_aux = l-> primera;
-             celda_t *celda_ant = malloc(sizeof(celda_t));
-             celda_ant = NULL;
-
+             celda_t *celda_ant;
              for(int i = 0; i < pos; i++){
                 celda_ant = celda_aux;
                 celda_aux = celda_aux -> siguiente;}
@@ -120,8 +113,9 @@ unsigned int lista_cantidad(lista_t *l) {
     return l->cantidad;
 }
 
+//intercambia los elementos de dos posiciones de la lista.
 void lista_intercambiar(lista_t *l,int pos1, int pos2){
-    elemento_t * e1 = malloc (sizeof(elemento_t));
+    elemento_t * e1;
     e1 = lista_elemento(l,pos1);
     lista_insertar(l, lista_elemento(l,pos2), pos1);
     lista_insertar(l, e1, pos2);}
@@ -132,7 +126,7 @@ int lista_ordenar(lista_t *l, funcion_comparacion_t comparar){
     //hecho de mayor a menor (?)
     int correcto = 1;
     do{
-        for(int i = 0; i< lista_cantidad(l) -1; i++){
+        for(int i = 0; i< lista_cantidad(l) -2; i++){
             if(comparar(lista_elemento(l,i),lista_elemento(l,i+1)) == 2){ //elem1 menor a elem2
                 lista_intercambiar(l,i,i+1);
                 correcto = 0;}

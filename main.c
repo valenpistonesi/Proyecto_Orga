@@ -89,11 +89,18 @@ int main() {
 
             lista_t *lcu = lista_crear();
             *lcu = multiset_elementos(cada_uno_m, NULL);
-            printf("se esta por llamar ee\n");
-            printf("lista_elemento", lista_elemento(lcu,3) -> b);
-
-            printf("%d se llama a ordenar",lista_cantidad(lcu));
+            printf("antes de ordenar \n");
+            for (int i=0; i<lista_cantidad(lcu); i++)
+            {
+                printf("%s\n", lista_elemento(lcu, i)->b);
+            }
             lista_ordenar(lcu, funcion_comparacion_ejemplo);
+            printf("despues de ordenar \n");
+
+                for (int i=0; i<lista_cantidad(lcu); i++)
+            {
+                printf("%s\n", lista_elemento(lcu, i)->b);
+            }
 
             fprintf(fptr_cadauno, nombre_archivo);
             fprintf(fptr_cadauno,"\n");
