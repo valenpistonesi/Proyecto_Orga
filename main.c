@@ -48,7 +48,7 @@ void imprimir_lista(lista_t *l, FILE *filename){
     actual = l->primera;
     while(actual != NULL){
         fprintf(filename, "%i",actual-> elem -> a );
-        fprintf(filename,"  ");
+        fprintf(filename," ");
         fprintf(filename, actual-> elem -> b);
         fprintf(filename,"\n");
 
@@ -79,22 +79,24 @@ int main() {
     FILE *fptr_totales = fopen ("totales.txt", "w");
 
     multiset_t *totales_m = multiset_crear();
-    multiset_t *cada_uno_m = multiset_crear();
+
+    lista_t *lcu = lista_crear();
 
     while ((ent = readdir (directorio)) != NULL) {//acceder a textos, mientras haya archivos no analizados
         char *nombre_archivo = ent->d_name;
+        multiset_t *cada_uno_m = multiset_crear();
         if(tiene_extension_txt(nombre_archivo) && strcmp(nombre_archivo, "cadauno.txt") && strcmp(nombre_archivo, "totales.txt")) {
             llenar_totales(totales_m, nombre_archivo);
             llenar_totales(cada_uno_m, nombre_archivo);
 
-            lista_t *lcu = lista_crear();
-            *lcu = multiset_elementos(cada_uno_m, NULL);
-            printf("antes de ordenar \n");
-            for (int i=0; i<lista_cantidad(lcu); i++)
-            {
-                printf("%s\n", lista_elemento(lcu, i)->b);
-            }
+
+            lista_t *lcu2 = lista_crear();
+
+            *lcu2 = multiset_elementos(cada_uno_m, NULL);
+            *lcu = multiset_elementos(totales_m, NULL);
+
             lista_ordenar(lcu, funcion_comparacion_ejemplo);
+            lista_ordenar(lcu2, funcion_comparacion_ejemplo);
             printf("despues de ordenar \n");
 
                 for (int i=0; i<lista_cantidad(lcu); i++)
@@ -104,8 +106,9 @@ int main() {
 
             fprintf(fptr_cadauno, nombre_archivo);
             fprintf(fptr_cadauno,"\n");
-            imprimir_lista(lcu, fptr_cadauno);
+            imprimir_lista(lcu2, fptr_cadauno);
 
+            cada_uno_m = NULL;
 
             /*printf(nombre_archivo);
             fprintf(fptr_cadauno, nombre_archivo); // imprimir en archivo de texto
@@ -118,6 +121,8 @@ int main() {
 
         }
     }
+
+    imprimir_lista(lcu, fptr_totales);
 
     if(hay_txts == false) {
         printf("\nno hay .txts en el directorio indicado");
