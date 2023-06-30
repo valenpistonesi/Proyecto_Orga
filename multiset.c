@@ -105,7 +105,6 @@ lista_t multiset_elementos(multiset_t *m, comparacion_resultado_t (*f)(elemento_
 
     return *l;
 }
-//en base a la funcion insertada generar una funcion compatible con lista_ordenar
 
 void multiset_recorredor_m(multiset_t *m){
     for (int i = 0; i< (sizeof(m -> siguiente) / sizeof(m-> siguiente[0])); i++){
