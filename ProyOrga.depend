@@ -41,25 +41,25 @@
 
 1684787706 c:\users\usuario\desktop\entorno\multiset.h
 
-1688097846 source:c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\main.c
+1688132008 source:c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\main.c
 	"lista.c"
 	"multiset.c"
 	<stdbool.h>
 	<dirent.h>
 	<unistd.h>
 
-1688085570 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\lista.c
+1688131953 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\lista.c
+	"lista.h"
+
+1688129306 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\lista.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
-	"lista.h"
 
-1688046906 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\lista.h
-
-1688083595 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\multiset.c
+1688131755 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\multiset.c
 	"multiset.h"
 
-1688040310 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\multiset.h
+1688131774 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\multiset.h
 
 1687991676 source:c:\users\kunam\desktop\nacho\odc\main.c
 	"lista.c"

@@ -30,7 +30,6 @@ PRIMERO.txt
 SEGUNDO.txt
 3 e
 3 e
-3 p
 2 t
 1 a
 1 ay
@@ -54,19 +53,10 @@ SEGUNDO.txt
 1 ma
 1 mam
 1 mama
+1 p
 1 pa
 1 pap
 1 papa
-1 pe
-1 pee
-1 peep
-1 peepe
-1 peepee
-1 po
-1 poo
-1 poop
-1 poopo
-1 poopoo
 1 s
 1 si
 1 sie

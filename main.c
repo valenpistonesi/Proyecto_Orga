@@ -37,9 +37,12 @@ void llenar_totales (multiset_t *m, char *filename){
                 multiset_insertar(m, palabra);
                 k = 0;
             }
-            j++;}
+            j++;
+        }
         palabra[k] = '\0';
-        multiset_insertar(m, palabra);}}
+        multiset_insertar(m, palabra);
+    }
+}
 
 
 //imprime los contenidos de la lista
@@ -52,7 +55,8 @@ void imprimir_lista(lista_t *l, FILE *filename){
         fprintf(filename, actual-> elem -> b);
         fprintf(filename,"\n");
 
-        actual = actual -> siguiente;}
+        actual = actual -> siguiente;
+    }
 }
 
 int main() {
@@ -99,8 +103,7 @@ int main() {
             lista_ordenar(lcu2, funcion_comparacion_ejemplo);
             printf("despues de ordenar \n");
 
-                for (int i=0; i<lista_cantidad(lcu); i++)
-            {
+            for (int i=0; i<lista_cantidad(lcu); i++) {
                 printf("%s\n", lista_elemento(lcu, i)->b);
             }
 
@@ -109,16 +112,6 @@ int main() {
             imprimir_lista(lcu2, fptr_cadauno);
 
             cada_uno_m = NULL;
-
-            /*printf(nombre_archivo);
-            fprintf(fptr_cadauno, nombre_archivo); // imprimir en archivo de texto
-            printf(": \n\n");
-
-            obtener_palabras(nombre_archivo, m, fptr_cadauno, fptr_totales, buffer_g);
-            hay_txts = true;
-            printf("\n\n");
-            fprintf(fptr_cadauno, "\n");*/
-
         }
     }
 
@@ -132,4 +125,5 @@ int main() {
     fclose(fptr_cadauno);
     fclose(fptr_totales);
 
-    return 0;}
+    return 0;
+}

@@ -16,7 +16,8 @@ multiset_t* multiset_crear(){
     for (int i = 0; i< 26; i++){
         devolver -> siguiente[i] = NULL;
     }
-    return devolver;}
+    return devolver;
+}
 
 
 //Inserta la palabra s al multiset m.
@@ -31,7 +32,9 @@ void multiset_insertar(multiset_t *m, char *s){
         }
         else{
             (m_actual-> siguiente[letra_actual])-> cantidad = (m_actual-> siguiente[letra_actual])->cantidad + 1;
-            m_actual = m_actual-> siguiente[letra_actual];}}
+             m_actual = m_actual-> siguiente[letra_actual];
+            }
+    }
 }
 
 //Devuelve la cantidad de repeticiones de la palabra s en el multiset m.
@@ -44,80 +47,59 @@ int multiset_cantidad(multiset_t *m, char *s){
     }
 
     for(int i = 0; s[i] != '\0' && cantidad; i++){
-         if(actual -> siguiente[s[i] -97]!= NULL){
+        if(actual -> siguiente[s[i] -97]!= NULL){
             if( ((actual -> siguiente[s[i]-97]) -> cantidad) < cantidad )
-               cantidad = (actual -> siguiente[s[i]-97]) -> cantidad;}
-         else cantidad = 0;}
-    return cantidad;}
+               cantidad = (actual -> siguiente[s[i]-97]) -> cantidad;
+        }
+         else cantidad = 0;
+    }
+    return cantidad;
+}
 
+//funcion auxiliar que multiset_elementos utiliza para insertar las palabras a la lista
 lista_t* insertarPreOrdenAux(multiset_t *arbol, lista_t *lista, char *palabra, int nivel){
     elemento_t* elemAux;
     elemAux = malloc(sizeof(elemento_t));
     elemAux -> b = malloc(sizeof(char)*256);
 
-    if(arbol -> cantidad>0 ){
+    if(arbol -> cantidad > 0){
         palabra [nivel] = '\0';
         elemAux -> a = arbol-> cantidad;
         elemAux -> b = strdup(palabra);
         lista_insertar (lista, elemAux, lista_cantidad(lista));
-        /*printf("celda numero");
-        printf("%i", nivel);
-        printf("\n");
-        printf("elem: \n");
-        printf("a: ");
-        printf("%d", lista_elemento(lista,lista_cantidad(lista)-1)->a);
-        printf("  ");
-        printf("b: ");
-        //printf(celda_nueva->elem->b);
-        printf(lista_elemento(lista,lista_cantidad(lista)-1)->b);*/
     }
+
     for (int pos = 0; pos < 26; pos++){
         if(arbol -> siguiente[pos] != NULL){
             palabra [nivel]= 97 + pos;
             insertarPreOrdenAux(arbol ->siguiente [pos], lista,palabra, nivel +1);
-            /*printf("celda numero ");
-            printf("%i", nivel);
-            printf("\n");
-            printf("elem: \n");
-            printf("a: ");
-            printf("%i", lista_elemento(lista,nivel)->a);
-            printf("  ");
-            printf("b: ");
-            //printf(celda_nueva->elem->b);
-            printf(lista_elemento(lista,nivel)->b);*/
         }
     }
 
     return lista;
 }
 
+//devuelve una lista con las palabras dentro del multiset dado como parametro
 lista_t multiset_elementos(multiset_t *m, comparacion_resultado_t (*f)(elemento_t*, elemento_t*)){
     lista_t *l = lista_crear();
     char *palabra = malloc(sizeof(char)*256);
     l = insertarPreOrdenAux(m, l, palabra, 0);
 
-    printf("multiset elementos\n");
-    /*for (int i=0; i<lista_cantidad(l); i++)
-    {
-        printf("%s\n", lista_elemento(l, i)->b);
-    }
-    printf("multiset elementos\n");*/
-
     return *l;
 }
 
+//funcion que recorre el multiset
 void multiset_recorredor_m(multiset_t *m){
     for (int i = 0; i< (sizeof(m -> siguiente) / sizeof(m-> siguiente[0])); i++){
         multiset_recorredor_m(m->siguiente[i]);}
     free(m);
 }
 
-//Elimina el multiset m liberando el espacio
-//de memoria reservado. Luego de la invocaci´on m debe valer NULL.
+/*Elimina el multiset m liberando el espacio
+de memoria reservado. Luego de la invocacion m debe valer NULL.*/
 void multiset_eliminar(multiset_t **m){
     multiset_recorredor_m(*m);
     free(m);
-
 }
 
 

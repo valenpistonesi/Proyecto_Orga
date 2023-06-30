@@ -1,6 +1,5 @@
 3 e
 3 e
-3 p
 3 s
 3 t
 2 c
@@ -42,19 +41,10 @@
 1 ma
 1 mam
 1 mama
+1 p
 1 pa
 1 pap
 1 papa
-1 pe
-1 pee
-1 peep
-1 peepe
-1 peepee
-1 po
-1 poo
-1 poop
-1 poopo
-1 poopoo
 1 se
 1 sei
 1 seis
