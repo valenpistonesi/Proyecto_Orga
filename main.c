@@ -59,15 +59,23 @@ void imprimir_lista(lista_t *l, FILE *filename){
     }
 }
 
-int main() {
-
+int main(int argc, char *argv[]) {
+    char *dirNombre = malloc(sizeof(char) * 50); //directorios a leer
     //leer textos y una sola vez(sin guardarlos en ninguna lista o array), mientras se leen se sacan
     //las palabras y se guardan en el multiset, luegoo de ese multiset se forma el archivo
-
-    char *dirNombre = malloc(sizeof(char) * 50); //directorios a leer
-
-    printf("Ingrese el directorio a analizar: \n"); //C:\\Users\\usuario\\OneDrive\\Escritorio\\Uni\\ODC\\proyecto
-    scanf("%s", dirNombre);
+    if(argc>=3){
+        printf("Pantalla de ayuda de cuentapalabras.exe:\n");
+        printf("El programa recibe como parametro una direccion en memoria que contenga archivos de texto y contara la cantidad de\n");
+        printf("apariciones de cada palabra dentro de los archivos. En base a esto creara dos archivos, totales.txt y cadauno.txt los cuales\n");
+        printf("continen el output del programa. Totales tiene la cantidad de apariciones de todas las palabras en todos los archivos juntos y\n");
+        printf("cadauno.txt la cantidad de apariciones por archivo.\n");
+        printf("el programa se llama por consola como: cuentapalabras [direccion] o cuentapalabras [-h] [direccion], lo que llama a este texto\n");
+        printf("explicativo, ademas de ejecutar el programa.");
+        dirNombre= argv[2];
+    }
+    else{
+        dirNombre = argv[1];
+    }
 
     DIR *directorio = malloc(sizeof(DIR));
     directorio = opendir (dirNombre);

@@ -141,3 +141,23 @@
 
 1688132702 c:\users\usuario\desktop\oc\multiset.h
 
+1688154037 source:c:\users\usuario\desktop\oc2\main.c
+	"lista.c"
+	"multiset.c"
+	<stdbool.h>
+	<dirent.h>
+	<unistd.h>
+
+1688154524 c:\users\usuario\desktop\oc2\lista.c
+	"lista.h"
+
+1688154037 c:\users\usuario\desktop\oc2\lista.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1688154037 c:\users\usuario\desktop\oc2\multiset.c
+	"multiset.h"
+
+1688154037 c:\users\usuario\desktop\oc2\multiset.h
+

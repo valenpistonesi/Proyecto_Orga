@@ -98,7 +98,6 @@ elemento_t* lista_eliminar(lista_t *l, unsigned int pos){
         }
 
         devolver = celda_aux-> elem;
-        printf("eliminado %s \n", devolver ->b);
         free(celda_aux);
         l ->cantidad = l->cantidad - 1;
         return devolver;
