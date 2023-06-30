@@ -117,6 +117,7 @@ int main() {
     }
     lista_recortar(lcu);
     lista_ordenar(lcu, funcion_comparacion_ejemplo);
+
     imprimir_lista(lcu, fptr_totales);
 
     if(hay_txts == false) {

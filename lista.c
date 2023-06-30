@@ -129,9 +129,12 @@ int lista_ordenar(lista_t *l, funcion_comparacion_t comparar){
     do{
         correcto = 1;
         for(int i = 0; i< lista_cantidad(l) - 1; i++){
-           if(comparar(lista_elemento(l,i),lista_elemento(l,i+1)) == 2){ //elem1 menor a elem2
+            if(comparar(lista_elemento(l,i),lista_elemento(l,i+1)) == 0){ //elem1 menor a elem2
                 lista_intercambiar(l,i,i+1);
                 correcto = 0;}
+            else if(comparar(lista_elemento(l,i),lista_elemento(l,i+1)) == 1) {
+                    lista_eliminar(l,i+1);
+                 }
         }
 
     } while(!correcto);
@@ -169,9 +172,9 @@ comparacion_resultado_t funcion_comparacion_ejemplo(elemento_t *elem1, elemento_
                devolver = ELEM1_MENOR_QUE_ELEM2;
            }
            //si aparecen la misma cant de veces, ordeno alfabeticamente
-           else if (strcmp(elem1 -> b, elem2 -> b) < 0) {
+           else if (strcmp(elem1 -> b, elem2 -> b) > 0) {
                     devolver = ELEM1_MAYOR_QUE_ELEM2;
-                } else if (strcmp(elem1 -> b, elem2 -> b) > 0) {
+                } else if (strcmp(elem1 -> b, elem2 -> b) < 0) {
                           devolver = ELEM1_MENOR_QUE_ELEM2;;
                        }
                        else devolver = ELEM1_IGUAL_QUE_ELEM2;
