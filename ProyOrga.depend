@@ -121,23 +121,23 @@
 
 1685135577 c:\users\usuario\desktop\orga\multiset.h
 
-1688073321 source:c:\users\usuario\desktop\oc\main.c
+1688136923 source:c:\users\usuario\desktop\oc\main.c
 	"lista.c"
 	"multiset.c"
 	<stdbool.h>
 	<dirent.h>
 	<unistd.h>
 
-1688073668 c:\users\usuario\desktop\oc\lista.c
+1688135925 c:\users\usuario\desktop\oc\lista.c
+	"lista.h"
+
+1688132702 c:\users\usuario\desktop\oc\lista.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
-	"lista.h"
 
-1688064128 c:\users\usuario\desktop\oc\lista.h
-
-1688073108 c:\users\usuario\desktop\oc\multiset.c
+1688133123 c:\users\usuario\desktop\oc\multiset.c
 	"multiset.h"
 
-1688064128 c:\users\usuario\desktop\oc\multiset.h
+1688132702 c:\users\usuario\desktop\oc\multiset.h
 

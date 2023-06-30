@@ -90,22 +90,23 @@ int main() {
         char *nombre_archivo = ent->d_name;
         multiset_t *cada_uno_m = multiset_crear();
         if(tiene_extension_txt(nombre_archivo) && strcmp(nombre_archivo, "cadauno.txt") && strcmp(nombre_archivo, "totales.txt")) {
+            hay_txts = true;
             llenar_totales(totales_m, nombre_archivo);
             llenar_totales(cada_uno_m, nombre_archivo);
 
 
             lista_t *lcu2 = lista_crear();
 
+
+
             *lcu2 = multiset_elementos(cada_uno_m, NULL);
             *lcu = multiset_elementos(totales_m, NULL);
 
-            lista_ordenar(lcu, funcion_comparacion_ejemplo);
-            lista_ordenar(lcu2, funcion_comparacion_ejemplo);
-            printf("despues de ordenar \n");
 
-            for (int i=0; i<lista_cantidad(lcu); i++) {
-                printf("%s\n", lista_elemento(lcu, i)->b);
-            }
+            lista_recortar(lcu2);
+
+
+            lista_ordenar(lcu2, funcion_comparacion_ejemplo);
 
             fprintf(fptr_cadauno, nombre_archivo);
             fprintf(fptr_cadauno,"\n");
@@ -114,7 +115,8 @@ int main() {
             cada_uno_m = NULL;
         }
     }
-
+    lista_recortar(lcu);
+    lista_ordenar(lcu, funcion_comparacion_ejemplo);
     imprimir_lista(lcu, fptr_totales);
 
     if(hay_txts == false) {

@@ -81,7 +81,7 @@ int lista_insertar(lista_t *l, elemento_t *elemen, unsigned int pos){
 elemento_t* lista_eliminar(lista_t *l, unsigned int pos){
     if(l->cantidad > pos){
         elemento_t *devolver = malloc(sizeof(elemento_t));
-        celda_t *celda_aux = malloc(sizeof(celda_t));
+        celda_t *celda_aux;
         if(pos == 0){
             celda_aux = l-> primera;
             l -> primera = (l-> primera) -> siguiente;
@@ -98,6 +98,7 @@ elemento_t* lista_eliminar(lista_t *l, unsigned int pos){
         }
 
         devolver = celda_aux-> elem;
+        printf("eliminado %s \n", devolver ->b);
         free(celda_aux);
         l ->cantidad = l->cantidad - 1;
         return devolver;
@@ -135,6 +136,26 @@ int lista_ordenar(lista_t *l, funcion_comparacion_t comparar){
 
     } while(!correcto);
     return 0;
+}
+
+void lista_recortar(lista_t *l){
+    if(lista_cantidad(l)>0){
+        elemento_t *act = lista_elemento(l,0);
+        elemento_t *ant;
+        char *p1;
+        char *p2;
+        for(int i = 0; i< lista_cantidad(l)-1;i++){
+            ant = lista_elemento(l,i);
+            act = lista_elemento(l,i+1);
+            p1 = act -> b;
+            p2 = ant ->b;
+
+            if(strlen(p1)> strlen(p2)){
+                lista_eliminar(l,i);
+                i--;}
+        }
+    }
+
 }
 
 //funcion comparador utilizada en lista_ordenar

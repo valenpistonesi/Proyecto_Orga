@@ -57,33 +57,33 @@ int multiset_cantidad(multiset_t *m, char *s){
 }
 
 //funcion auxiliar que multiset_elementos utiliza para insertar las palabras a la lista
-lista_t* insertarPreOrdenAux(multiset_t *arbol, lista_t *lista, char *palabra, int nivel){
+lista_t* recorredor_me(multiset_t *m, lista_t *l, char *p, int n){
     elemento_t* elemAux;
     elemAux = malloc(sizeof(elemento_t));
     elemAux -> b = malloc(sizeof(char)*256);
 
-    if(arbol -> cantidad > 0){
-        palabra [nivel] = '\0';
-        elemAux -> a = arbol-> cantidad;
-        elemAux -> b = strdup(palabra);
-        lista_insertar (lista, elemAux, lista_cantidad(lista));
+    if(m -> cantidad > 0){
+        p [n] = '\0';
+        elemAux -> a = m-> cantidad;
+        elemAux -> b = strdup(p);
+        lista_insertar (l, elemAux, lista_cantidad(l));
     }
 
     for (int pos = 0; pos < 26; pos++){
-        if(arbol -> siguiente[pos] != NULL){
-            palabra [nivel]= 97 + pos;
-            insertarPreOrdenAux(arbol ->siguiente [pos], lista,palabra, nivel +1);
+        if(m -> siguiente[pos] != NULL){
+            p [n]= 97 + pos;
+            recorredor_me(m ->siguiente [pos], l,p, n +1);
         }
     }
 
-    return lista;
+    return l;
 }
 
 //devuelve una lista con las palabras dentro del multiset dado como parametro
 lista_t multiset_elementos(multiset_t *m, comparacion_resultado_t (*f)(elemento_t*, elemento_t*)){
     lista_t *l = lista_crear();
     char *palabra = malloc(sizeof(char)*256);
-    l = insertarPreOrdenAux(m, l, palabra, 0);
+    l = recorredor_me(m, l, palabra, 0);
 
     return *l;
 }
