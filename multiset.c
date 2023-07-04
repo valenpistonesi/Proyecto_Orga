@@ -16,6 +16,7 @@ multiset_t* multiset_crear(){
     for (int i = 0; i< 26; i++){
         devolver -> siguiente[i] = NULL;
     }
+
     return devolver;
 }
 
@@ -53,6 +54,7 @@ int multiset_cantidad(multiset_t *m, char *s){
         }
          else cantidad = 0;
     }
+
     return cantidad;
 }
 

@@ -48,18 +48,18 @@
 	<dirent.h>
 	<unistd.h>
 
-1688152512 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\lista.c
+1688432821 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\lista.c
 	"lista.h"
 
-1688129306 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\lista.h
+1688432821 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\lista.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1688147133 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\multiset.c
+1688498353 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\multiset.c
 	"multiset.h"
 
-1688146012 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\multiset.h
+1688432821 c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\multiset.h
 
 1687991676 source:c:\users\kunam\desktop\nacho\odc\main.c
 	"lista.c"
@@ -160,4 +160,11 @@
 	"multiset.h"
 
 1688154037 c:\users\usuario\desktop\oc2\multiset.h
+
+1688498283 source:c:\users\usuario\onedrive\escritorio\uni\odc\proyecto\cuentapalabras.c
+	"lista.c"
+	"multiset.c"
+	<stdbool.h>
+	<dirent.h>
+	<unistd.h>
 

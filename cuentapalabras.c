@@ -1,4 +1,3 @@
-
 #include "lista.c"
 #include "multiset.c"
 #include <stdbool.h>
@@ -7,9 +6,6 @@
 #define tamano_palabra_maximo 40
 #define max_length 255
 
-//REVISAR: inicializar todo como null
-//C:\\Users\\Usuario\\Desktop\\orga
-
 bool tiene_extension_txt (char const *nombre) {
     size_t largo = strlen(nombre);
     return largo > 4 && strcmp(nombre + largo - 4, ".txt") == 0;
@@ -17,6 +13,7 @@ bool tiene_extension_txt (char const *nombre) {
 
 //metodo que llena un multiset con las palabras del archivo insetado
 void llenar_totales (multiset_t *m, char *filename){
+
     FILE *fp = fopen(filename, "r");
     if (fp == NULL){
         printf("Error: no se puede abrir el archivo (llenar totales) %s", filename);
@@ -37,32 +34,46 @@ void llenar_totales (multiset_t *m, char *filename){
                 multiset_insertar(m, palabra);
                 k = 0;
             }
-            j++;}
+            j++;
+        }
         palabra[k] = '\0';
-        multiset_insertar(m, palabra);}}
+        multiset_insertar(m, palabra);
+    }
+}
 
 
 //imprime los contenidos de la lista
 void imprimir_lista(lista_t *l, FILE *filename){
-    celda_t *actual = l->primera;
+    celda_t *actual = malloc(sizeof(celda_t));
+    actual = l->primera;
     while(actual != NULL){
         fprintf(filename, "%i",actual-> elem -> a );
-        fprintf(filename,"  ");
+        fprintf(filename," ");
         fprintf(filename, actual-> elem -> b);
         fprintf(filename,"\n");
 
-        actual = actual -> siguiente;}
+        actual = actual -> siguiente;
+    }
+
 }
 
-int main() {
-
+int main(int argc, char *argv[]) {
+    char *dirNombre = malloc(sizeof(char) * 255); //directorios a leer
     //leer textos y una sola vez(sin guardarlos en ninguna lista o array), mientras se leen se sacan
     //las palabras y se guardan en el multiset, luegoo de ese multiset se forma el archivo
-
-    char *dirNombre = malloc(sizeof(char) * 50); //directorios a leer
-
-    printf("Ingrese el directorio a analizar: \n"); //C:\\Users\\usuario\\OneDrive\\Escritorio\\Uni\\ODC\\proyecto
-    scanf("%s", dirNombre);
+    if(argc>=3){
+        printf("Pantalla de ayuda de cuentapalabras.exe:\n");
+        printf("El programa recibe como parametro una direccion en memoria que contenga archivos de texto y contara la cantidad de\n");
+        printf("apariciones de cada palabra dentro de los archivos. En base a esto creara dos archivos, totales.txt y cadauno.txt los cuales\n");
+        printf("continen el output del programa. Totales tiene la cantidad de apariciones de todas las palabras en todos los archivos juntos y\n");
+        printf("cadauno.txt la cantidad de apariciones por archivo.\n");
+        printf("el programa se llama por consola como: cuentapalabras [direccion] o cuentapalabras [-h] [direccion], lo que llama a este texto\n");
+        printf("explicativo, ademas de ejecutar el programa.");
+        dirNombre= argv[2];
+    }
+    else{
+        dirNombre = argv[1];
+    }
 
     DIR *directorio = malloc(sizeof(DIR));
     directorio = opendir (dirNombre);
@@ -73,46 +84,59 @@ int main() {
     }
 
     struct dirent *ent;//estructura obtenida de readdir
-    bool hay_txts = false;
     FILE *fptr_cadauno = fopen ("cadauno.txt", "w");
     FILE *fptr_totales = fopen ("totales.txt", "w");
 
     multiset_t *totales_m = multiset_crear();
-    multiset_t *cada_uno_m = multiset_crear();
+
+    lista_t *lcu = lista_crear();
+
+    char* dirTxt = malloc(sizeof(char) * 255);
 
     while ((ent = readdir (directorio)) != NULL) {//acceder a textos, mientras haya archivos no analizados
         char *nombre_archivo = ent->d_name;
+        multiset_t *cada_uno_m = multiset_crear();
         if(tiene_extension_txt(nombre_archivo) && strcmp(nombre_archivo, "cadauno.txt") && strcmp(nombre_archivo, "totales.txt")) {
-            llenar_totales(totales_m, nombre_archivo);
-            llenar_totales(cada_uno_m, nombre_archivo);
 
-            lista_t lcu = multiset_elementos(cada_uno_m, NULL);
-            printf("%d",lista_cantidad(&lcu));
-            lista_ordenar(&lcu, funcion_comparacion_ejemplo);
+
+            strcpy(dirTxt, dirNombre);
+            strcat(dirTxt,"\\\\");
+            strcat(dirTxt,nombre_archivo);
+
+
+            llenar_totales(totales_m, dirTxt);
+            llenar_totales(cada_uno_m, dirTxt);
+
+            lista_t *lcu2 = lista_crear();
+
+
+            *lcu2 = multiset_elementos(cada_uno_m, NULL);
+            *lcu = multiset_elementos(totales_m, NULL);
+
+
+            lista_recortar(lcu2);
+
+
+            lista_ordenar(lcu2, funcion_comparacion_ejemplo);
 
             fprintf(fptr_cadauno, nombre_archivo);
             fprintf(fptr_cadauno,"\n");
-            imprimir_lista(&lcu, fptr_cadauno);
+            imprimir_lista(lcu2, fptr_cadauno);
 
-
-            /*printf(nombre_archivo);
-            fprintf(fptr_cadauno, nombre_archivo); // imprimir en archivo de texto
-            printf(": \n\n");
-
-            obtener_palabras(nombre_archivo, m, fptr_cadauno, fptr_totales, buffer_g);
-            hay_txts = true;
-            printf("\n\n");
-            fprintf(fptr_cadauno, "\n");*/
-
+            cada_uno_m = NULL;
         }
     }
+    lista_recortar(lcu);
+    lista_ordenar(lcu, funcion_comparacion_ejemplo);
 
-    if(hay_txts == false) {
-        printf("\nno hay .txts en el directorio indicado");
-        return -1;
-    }
+    imprimir_lista(lcu, fptr_totales);
+
+    free(lcu);
+    free(dirNombre);
+    free(dirTxt);
 
     fclose(fptr_cadauno);
     fclose(fptr_totales);
 
-    return 0;}
+    return 0;
+}

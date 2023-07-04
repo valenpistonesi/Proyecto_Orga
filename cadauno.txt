@@ -1,17 +1,23 @@
-Archivo1.txt
-1 tres
-2 dos
-2 uno
-Archivo2.txt
-1 dos
-1 tres
-2 treinta
-Archivo3.txt
-1 doce
-1 ocho
-1 tres
-2 treinta
-Archivo4.txt
-1 dos
-1 treinta
-2 ocho
+VS Barracas.txt
+1 armani
+1 borja
+1 diaz
+1 gomez
+1 herrera
+1 kranevitter
+1 maidana
+1 palavecino
+1 paradela
+1 rojas
+1 rondon
+VS The Strongest.txt
+1 aliendro
+1 armani
+1 barco
+1 beltr
+1 casco
+1 fernandez
+1 nico
+1 perez
+1 rojas
+2 diaz
